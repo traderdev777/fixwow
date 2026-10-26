@@ -93,7 +93,10 @@ export default function Navbar({
               alt="FixWow" 
               className="neat-logo-img"
               onError={(e) => {
-                e.currentTarget.src = `${import.meta.env.BASE_URL}fixwow-logo.png`;
+                if (!e.currentTarget.dataset.fallback) {
+                  e.currentTarget.dataset.fallback = 'true';
+                  e.currentTarget.src = `${import.meta.env.BASE_URL}fixwow-logo.png`;
+                }
               }}
             />
           </div>

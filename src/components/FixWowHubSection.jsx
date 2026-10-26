@@ -12,6 +12,7 @@ import {
   ArrowUpRight
 } from 'lucide-react';
 import { companyInfo } from '../data/companyInfo';
+import fixwowLogo from '../assets/fixwow-logo.png';
 
 export default function FixWowHubSection() {
   return (
@@ -103,7 +104,7 @@ export default function FixWowHubSection() {
                   <div className="map-center-pin">
                     <div className="pin-pulse"></div>
                     <div className="pin-icon">
-                      <img src="/fixwow-logo.png" alt="FixWow Hub" className="pin-logo" />
+                      <img src={fixwowLogo} alt="FixWow Hub" className="pin-logo" />
                     </div>
                     <span className="pin-label">Chokkana Halli Hub</span>
                   </div>

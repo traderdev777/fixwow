@@ -5,6 +5,7 @@ import {
   MapPin
 } from 'lucide-react';
 import { companyInfo } from '../data/companyInfo';
+import fixwowLogo from '../assets/fixwow-logo.png';
 
 export default function Footer({ setActiveTab, openBookingModal }) {
   return (
@@ -15,9 +16,12 @@ export default function Footer({ setActiveTab, openBookingModal }) {
           <div className="neat-footer-col brand-col">
             <div className="neat-footer-logo-wrap">
               <img 
-                src="/fixwow-logo.png" 
+                src={fixwowLogo} 
                 alt="FixWow" 
                 className="neat-footer-logo"
+                onError={(e) => {
+                  e.currentTarget.src = `${import.meta.env.BASE_URL}fixwow-logo.png`;
+                }}
               />
             </div>
             <p className="neat-footer-desc">

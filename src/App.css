@@ -3903,9 +3903,16 @@
 }
 
 .neat-logo-img {
-  height: 44px;
+  height: 46px;
   width: auto;
   object-fit: contain;
+  display: block;
+}
+
+[data-theme="dark"] .neat-logo-wrap {
+  background: #ffffff;
+  padding: 4px 8px;
+  border-radius: 10px;
 }
 
 .neat-nav-menu {
@@ -5617,9 +5624,139 @@
   cursor: pointer;
 }
 
-/* --- Responsive Adjustments for Neat Layout --- */
+/* --- Responsive Adjustments & Mobile Navigation Drawer --- */
+.neat-mobile-drawer {
+  display: none;
+}
+
 @media (max-width: 1024px) {
-  .neat-services-grid {
+  .neat-nav-menu {
+    display: none !important;
+  }
+
+  .neat-mobile-menu-btn {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    color: #1e293b;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  [data-theme="dark"] .neat-mobile-menu-btn {
+    background: #0f1e33;
+    border-color: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+  }
+
+  .neat-mobile-drawer {
+    display: block;
+    position: fixed;
+    top: 74px;
+    left: 0;
+    right: 0;
+    max-height: calc(100vh - 74px);
+    background: #ffffff;
+    border-bottom: 1px solid #e2e8f0;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.15);
+    z-index: 999;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    transform: translateY(-100%);
+    opacity: 0;
+    visibility: hidden;
+    transition: transform 0.26s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease, visibility 0.2s ease;
+  }
+
+  [data-theme="dark"] .neat-mobile-drawer {
+    background: #091321;
+    border-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+  }
+
+  .neat-mobile-drawer.open {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .neat-mobile-drawer-inner {
+    padding: 16px 18px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .neat-mobile-nav-links {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .neat-mobile-nav-link {
+    display: flex;
+    align-items: center;
+    padding: 12px 16px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #334155;
+    background: transparent;
+    border: none;
+    border-radius: 12px;
+    text-align: left;
+    cursor: pointer;
+    transition: all 0.18s ease;
+  }
+
+  [data-theme="dark"] .neat-mobile-nav-link {
+    color: #cbd5e1;
+  }
+
+  .neat-mobile-nav-link:hover {
+    background: #fff8f5;
+    color: #ff5722;
+  }
+
+  [data-theme="dark"] .neat-mobile-nav-link:hover {
+    background: rgba(255, 87, 34, 0.12);
+    color: #ff8a50;
+  }
+
+  .neat-mobile-nav-link.active {
+    background: #fff2e8;
+    color: #ff5722;
+    font-weight: 700;
+  }
+
+  [data-theme="dark"] .neat-mobile-nav-link.active {
+    background: rgba(255, 87, 34, 0.2);
+    color: #ff8a50;
+  }
+
+  .neat-mobile-drawer-footer {
+    padding-top: 10px;
+    border-top: 1px solid #edf2f7;
+  }
+
+  [data-theme="dark"] .neat-mobile-drawer-footer {
+    border-color: rgba(255, 255, 255, 0.08);
+  }
+
+  .neat-mobile-backdrop {
+    position: fixed;
+    inset: 74px 0 0 0;
+    background: rgba(15, 23, 42, 0.45);
+    backdrop-filter: blur(4px);
+    z-index: 998;
+  }
+
+  /* Tablet Grids */
+  .neat-hero-stats-grid {
     grid-template-columns: repeat(2, 1fr);
   }
   .neat-product-cards-grid {
@@ -5633,66 +5770,167 @@
   }
 }
 
-@media (max-width: 1024px) {
-  .neat-nav-menu {
-    display: none;
-  }
-  .neat-nav-menu.open {
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    top: 74px;
-    left: 0;
-    right: 0;
-    background: #ffffff;
-    border-bottom: 1px solid #e2e8f0;
-    padding: 16px 20px;
-    gap: 8px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
-    z-index: 1000;
-  }
-  [data-theme="dark"] .neat-nav-menu.open {
-    background: #091321;
-    border-color: rgba(255, 255, 255, 0.1);
-  }
-  .neat-nav-menu.open .neat-nav-link {
-    width: 100%;
-    justify-content: flex-start;
-    padding: 10px 16px;
-    font-size: 15px;
-    border-radius: 10px;
-  }
-  .neat-mobile-menu-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .neat-hero-stats-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  .neat-services-grid {
-    grid-template-columns: 1fr;
-  }
-  .neat-product-cards-grid {
-    grid-template-columns: 1fr;
-  }
-  .why-choose-grid {
-    grid-template-columns: 1fr;
-  }
+/* Tablet (768px - 1024px) fine tuning */
+@media (max-width: 1024px) and (min-width: 641px) {
   .neat-hero-buttons-row {
-    flex-direction: column;
-    width: 100%;
-  }
-  .neat-hero-buttons-row button {
-    width: 100%;
-    justify-content: center;
+    flex-direction: row;
+    gap: 16px;
   }
   .neat-sell-banner {
     flex-direction: column;
     text-align: center;
+    gap: 18px;
+  }
+}
+
+/* Mobile Devices (<= 640px) */
+@media (max-width: 640px) {
+  .neat-header-container {
+    height: 64px;
+    gap: 10px;
+  }
+  .neat-logo-img {
+    height: 38px;
+  }
+  .neat-mobile-drawer {
+    top: 64px;
+    max-height: calc(100vh - 64px);
+  }
+  .neat-mobile-backdrop {
+    top: 64px;
+  }
+  .neat-book-btn {
+    padding: 8px 14px;
+    font-size: 13px;
+    border-radius: 10px;
+  }
+
+  /* Hero Mobile */
+  .neat-hero-section {
+    padding: 42px 0 48px;
+  }
+  .neat-hero-title {
+    font-size: clamp(26px, 6.5vw, 42px);
+    margin-bottom: 16px;
+    line-height: 1.2;
+  }
+  .neat-hero-subtitle {
+    font-size: 14.5px;
+    margin-bottom: 24px;
+    padding: 0 4px;
+  }
+  .neat-trust-pill {
+    font-size: 12px;
+    padding: 5px 14px;
+    max-width: 100%;
+    white-space: normal;
+    text-align: center;
+  }
+  .neat-hero-buttons-row {
+    flex-direction: column;
+    width: 100%;
+    gap: 12px;
+    margin-bottom: 36px;
+  }
+  .neat-hero-buttons-row button,
+  .neat-hero-buttons-row .btn {
+    width: 100%;
+    justify-content: center;
+  }
+  .neat-hero-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+  .neat-stat-card {
+    padding: 16px 12px;
+    border-radius: 14px;
+    gap: 8px;
+  }
+  .neat-stat-icon-box {
+    width: 38px;
+    height: 38px;
+  }
+  .neat-stat-value {
+    font-size: 22px;
+  }
+  .neat-stat-label {
+    font-size: 11.5px;
+  }
+
+  /* Grids Mobile */
+  .neat-services-homepage-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-top: 24px;
+  }
+  .neat-product-cards-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+  .why-choose-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .neat-sell-banner {
+    flex-direction: column;
+    text-align: center;
+    padding: 24px 18px;
+    gap: 18px;
+    border-radius: 16px;
+  }
+  .neat-sell-banner-btns {
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+  }
+  .neat-sell-banner-btns button,
+  .neat-sell-banner-btns .btn {
+    width: 100%;
+    justify-content: center;
   }
   .neat-partner-props-grid {
     grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .neat-partner-types-row {
+    justify-content: center;
+    gap: 8px;
+  }
+  .neat-how-it-works-card {
+    padding: 24px 18px;
+    border-radius: 18px;
+  }
+  .neat-heading-title {
+    font-size: 24px;
+  }
+  .neat-subtitle {
+    font-size: 14px;
+  }
+}
+
+/* Extra Small Phones (<= 380px) */
+@media (max-width: 380px) {
+  .neat-header-container {
+    gap: 6px;
+  }
+  .neat-logo-img {
+    height: 32px;
+  }
+  .neat-book-btn {
+    padding: 7px 10px;
+    font-size: 12px;
+  }
+  .neat-hero-title {
+    font-size: 24px;
+  }
+  .neat-hero-stats-grid {
+    gap: 8px;
+  }
+  .neat-stat-card {
+    padding: 12px 8px;
+  }
+  .neat-stat-value {
+    font-size: 19px;
   }
 }
 
@@ -6359,13 +6597,20 @@
 }
 
 .neat-footer-logo-wrap {
-  margin-bottom: 16px;
+  display: inline-flex;
+  align-items: center;
+  background: #ffffff;
+  padding: 6px 14px;
+  border-radius: 12px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
+  margin-bottom: 20px;
 }
 
 .neat-footer-logo {
   height: 42px;
   width: auto;
   object-fit: contain;
+  display: block;
 }
 
 .neat-footer-desc {
@@ -11038,8 +11283,18 @@
   color: #cbd5e1;
 }
 
-/* Responsive Overrides */
+/* ==========================================================================
+   MASTER RESPONSIVE SYSTEM (Mobile, Tablet, Desktop & Foldable Screens)
+   ========================================================================== */
+
+/* --- 1. Large Tablets & Small Laptops (max-width: 1024px) --- */
 @media (max-width: 1024px) {
+  /* Layout & Containers */
+  .container {
+    padding: 0 20px;
+  }
+
+  /* WowCars Flagship Grid */
   .wowcars-hero-grid,
   .calculator-body-grid,
   .form-row-three {
@@ -11047,36 +11302,478 @@
   }
   .wowcars-grid-container {
     grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
   }
   .assurance-pillars-grid {
     grid-template-columns: repeat(2, 1fr);
   }
+  .wow-flagship-cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+  }
+  .wow-flagship-card.card-tronics {
+    grid-column: span 2;
+  }
+
+  /* Dedicated Services Two-Column Grid */
+  .neat-services-two-col-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  /* Garage Section */
+  .garage-capabilities-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Seller Ecosystem */
+  .dashboard-profile-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
 }
 
+/* --- 2. Tablets in Portrait & Phablets (max-width: 768px) --- */
 @media (max-width: 768px) {
+  /* Header & Navigation */
+  .neat-header-container {
+    height: 68px;
+  }
+  .neat-logo-img {
+    height: 40px;
+  }
+
+  /* Services Explorer */
+  .neat-services-two-col-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-top: 28px;
+  }
+  .neat-service-two-col-card {
+    padding: 24px 20px;
+    border-radius: 18px;
+  }
+  .neat-services-trust-bar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+  .services-trust-item {
+    justify-content: center;
+  }
+
+  /* Flagship Cards in Used Goods */
+  .wow-flagship-cards-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .wow-flagship-card.card-tronics {
+    grid-column: span 1;
+  }
+  .wow-flagship-card {
+    padding: 20px 18px;
+  }
+
+  /* WowCars Flagship */
   .wowcars-grid-container {
     grid-template-columns: 1fr;
   }
   .wowcars-stats-row {
     grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
   }
   .wowcars-search-row {
     grid-template-columns: 1fr;
+    gap: 12px;
   }
   .spotlight-actions {
     grid-template-columns: 1fr;
+    gap: 10px;
   }
   .assurance-pillars-grid {
     grid-template-columns: 1fr;
+    gap: 14px;
   }
   .inspection-checklist-grid {
     grid-template-columns: 1fr;
   }
   .sell-estimator-card {
-    padding: 24px;
+    padding: 22px 18px;
   }
   .wowcars-hero-headline {
-    font-size: 1.7rem;
+    font-size: 1.85rem;
+  }
+
+  /* WowBikes Page */
+  .wow-cars-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+  .wow-secondary-controls {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
+  }
+  .wow-fuel-chips {
+    flex-wrap: wrap;
+  }
+  .wow-breadcrumb-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  /* WowTronics Page */
+  .wow-tronics-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  /* Booking Tracker */
+  .stepper-horizontal {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .step-node:not(:last-child)::after {
+    display: none;
+  }
+  .tracker-details-grid {
+    grid-template-columns: 1fr;
+  }
+  .tracker-search-form {
+    width: 100%;
+  }
+
+  /* Mega Garage */
+  .garage-capabilities-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .dual-delivery-header {
+    text-align: center;
+  }
+  .section-header-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  .section-header-row button,
+  .section-header-row .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Seller Hub CTA Banner */
+  .seller-hub-cta-banner {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+    padding: 20px 18px;
+  }
+  .seller-hub-cta-banner .cta-left {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .btn-seller-dash-action {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Public Seller Profile */
+  .seller-profile-topbar .flex-between {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+  .seller-hero-content {
+    padding: 0 18px 20px;
+  }
+  .seller-header-main-row {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-top: -48px;
+    gap: 14px;
+  }
+  .seller-identity-info {
+    padding-top: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .seller-title-badge-row {
+    justify-content: center;
+  }
+  .seller-meta-stats-row {
+    justify-content: center;
+  }
+  .seller-header-actions {
+    padding-top: 4px;
+    width: 100%;
+    justify-content: center;
+    gap: 10px;
+  }
+  .seller-header-actions button,
+  .seller-header-actions a,
+  .seller-header-actions .btn {
+    flex: 1;
+    min-width: 130px;
+    justify-content: center;
+  }
+  .seller-verification-banner-box {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+  .verification-box-left {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .seller-section-header-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  /* Footer */
+  .neat-footer-columns-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px 20px;
+  }
+  .neat-footer-bottom {
+    flex-direction: column;
+    gap: 14px;
+    text-align: center;
+  }
+  .neat-social-icons-row {
+    justify-content: center;
+  }
+}
+
+/* --- 3. Standard Mobile Phones (max-width: 640px) --- */
+@media (max-width: 640px) {
+  /* Universal Section Headings */
+  .neat-section-header {
+    margin-bottom: 28px;
+  }
+  .neat-heading-title {
+    font-size: 24px;
+    line-height: 1.25;
+    margin-top: 10px;
+  }
+  .neat-subtitle {
+    font-size: 14px;
+    line-height: 1.55;
+    margin-top: 8px;
+  }
+  .section-title {
+    font-size: 1.65rem;
+    line-height: 1.25;
+  }
+
+  /* WowTronics Mobile Grid */
+  .wow-tronics-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  /* Dashboard Form Fields */
+  .form-fields-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .dashboard-title-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .dashboard-main-title {
+    font-size: 20px;
+  }
+
+  /* Category Filter Pills (UsedGoodsStore) */
+  .neat-category-pills-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+  }
+  .neat-filter-pill {
+    padding: 7px 14px;
+    font-size: 12.5px;
+    border-radius: 9999px;
+  }
+
+  /* Product Cards Body */
+  .neat-product-card {
+    border-radius: 16px;
+  }
+  .neat-product-img-wrapper {
+    height: 180px;
+  }
+  .neat-product-body {
+    padding: 16px;
+  }
+  .neat-product-title {
+    font-size: 15px;
+  }
+  .neat-price-row {
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+  }
+  .btn-neat-add-cart {
+    padding: 8px 16px;
+    font-size: 13px;
+  }
+
+  /* Modals: Universal Mobile Responsiveness */
+  .neat-modal-backdrop,
+  .modal-backdrop {
+    padding: 10px;
+    align-items: flex-end;
+  }
+  .neat-modal-card,
+  .modal-card {
+    max-width: 100%;
+    width: 100%;
+    max-height: calc(100vh - 20px);
+    border-radius: 20px 20px 14px 14px;
+    padding: 22px 18px 24px;
+  }
+  .neat-modal-title {
+    font-size: 19px;
+  }
+  .neat-modal-actions {
+    flex-direction: column-reverse;
+    gap: 10px;
+    width: 100%;
+    margin-top: 18px;
+  }
+  .neat-modal-actions button,
+  .neat-modal-actions .btn {
+    width: 100%;
+    justify-content: center;
+    padding: 12px;
+  }
+  .neat-form-row {
+    flex-direction: column;
+    gap: 12px;
+  }
+  .neat-location-box {
+    padding: 14px 14px;
+  }
+
+  /* Cart Drawer Mobile */
+  .cart-drawer-card {
+    width: 100%;
+    padding: 18px 16px;
+  }
+  .cart-item-row {
+    padding: 10px;
+    gap: 8px;
+  }
+  .cart-item-info {
+    min-width: 0;
+  }
+
+  /* Floating Actions on Mobile */
+  .floating-actions-container {
+    bottom: 16px;
+    right: 16px;
+    gap: 10px;
+  }
+  .floating-btn {
+    width: 44px;
+    height: 44px;
+  }
+  .ai-chat-popup {
+    position: fixed;
+    bottom: 74px;
+    left: 14px;
+    right: 14px;
+    width: auto;
+    max-height: calc(100vh - 100px);
+    border-radius: 18px;
+    z-index: 1001;
+  }
+
+  /* Footer 1-Column */
+  .neat-footer-columns-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .brand-col {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .neat-footer-logo-wrap {
+    justify-content: center;
+  }
+  .neat-footer-contact-list {
+    align-items: center;
+  }
+  .footer-contact-item {
+    justify-content: center;
+    text-align: center;
+  }
+  .neat-footer-col {
+    text-align: center;
+  }
+  .neat-footer-links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+/* --- 4. Extra-Small Screens (max-width: 380px) --- */
+@media (max-width: 380px) {
+  .neat-header-container {
+    padding: 0 10px;
+    height: 60px;
+    gap: 6px;
+  }
+  .neat-logo-img {
+    height: 32px;
+  }
+  .neat-book-btn {
+    padding: 6px 10px;
+    font-size: 11.5px;
+    gap: 4px;
+  }
+  .neat-cart-btn {
+    width: 34px;
+    height: 34px;
+  }
+  .neat-mobile-menu-btn {
+    width: 36px !important;
+    height: 36px !important;
+  }
+  .neat-hero-title {
+    font-size: 23px;
+    line-height: 1.2;
+  }
+  .neat-hero-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+  .neat-stat-card {
+    padding: 12px 6px;
+  }
+  .neat-stat-value {
+    font-size: 18px;
+  }
+  .neat-stat-label {
+    font-size: 10.5px;
+  }
+  .neat-modal-card {
+    padding: 16px 12px;
   }
 }
 

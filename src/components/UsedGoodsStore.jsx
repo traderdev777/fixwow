@@ -22,6 +22,7 @@ import {
 } from 'lucide-react';
 import SellerVerificationIcon from './SellerVerificationIcon';
 import { calculateSellerBadge, INITIAL_MARKETPLACE_PRODUCTS, INITIAL_SELLERS } from '../data/marketplaceData';
+import wowcarsLogo from '../assets/wowcars-logo.png';
 
 export default function UsedGoodsStore({ 
   addToCart, 
@@ -151,7 +152,17 @@ export default function UsedGoodsStore({
           >
             <div className="flagship-card-header">
               <div className="flagship-logo-wrap">
-                <img src="/wowcars-logo.png" alt="WowCars" className="flagship-wowcars-logo" />
+                <img 
+                  src={wowcarsLogo} 
+                  alt="WowCars - Pre-Owned Cars You Can Trust" 
+                  className="flagship-wowcars-logo"
+                  onError={(e) => {
+                    if (!e.currentTarget.dataset.fallback) {
+                      e.currentTarget.dataset.fallback = 'true';
+                      e.currentTarget.src = `${import.meta.env.BASE_URL}wowcars-logo.png`;
+                    }
+                  }}
+                />
               </div>
               <span className="flagship-badge">150-Point Checked</span>
             </div>

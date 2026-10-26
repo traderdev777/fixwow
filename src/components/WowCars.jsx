@@ -28,6 +28,7 @@ import {
   DollarSign
 } from 'lucide-react';
 import SellerVerificationIcon from './SellerVerificationIcon';
+import wowcarsLogo from '../assets/wowcars-logo.png';
 import { 
   calculateSellerBadge, 
   WOW_CARS_BRANDS, 
@@ -239,9 +240,15 @@ export default function WowCars({
             <div className="wowcars-hero-left">
               <div className="wowcars-brand-logo-frame">
                 <img 
-                  src="/wowcars-logo.png" 
+                  src={wowcarsLogo} 
                   alt="WowCars - Pre-Owned Cars You Can Trust" 
                   className="wowcars-main-logo"
+                  onError={(e) => {
+                    if (!e.currentTarget.dataset.fallback) {
+                      e.currentTarget.dataset.fallback = 'true';
+                      e.currentTarget.src = `${import.meta.env.BASE_URL}wowcars-logo.png`;
+                    }
+                  }}
                 />
               </div>
 
